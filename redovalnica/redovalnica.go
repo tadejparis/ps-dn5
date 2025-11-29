@@ -3,9 +3,9 @@ package redovalnica
 import "fmt"
 
 type Student struct {
-	ime     string
-	priimek string
-	ocene   []int
+	Ime     string
+	Priimek string
+	Ocene   []int
 }
 
 func DodajOceno(studenti map[string]Student, vpisnaStevilka string, ocena int) {
@@ -19,7 +19,7 @@ func DodajOceno(studenti map[string]Student, vpisnaStevilka string, ocena int) {
 		return
 	}
 
-	e.ocene = append(studenti[vpisnaStevilka].ocene, ocena)
+	e.Ocene = append(studenti[vpisnaStevilka].Ocene, ocena)
 	studenti[vpisnaStevilka] = e
 }
 
@@ -30,16 +30,16 @@ func povprecje(studenti map[string]Student, vpisnaStevilka string) float64 {
 	}
 
 	var total = 0.0
-	for i := range studenti[vpisnaStevilka].ocene {
-		total += float64(studenti[vpisnaStevilka].ocene[i])
+	for i := range studenti[vpisnaStevilka].Ocene {
+		total += float64(studenti[vpisnaStevilka].Ocene[i])
 	}
-	return total / float64(len(studenti[vpisnaStevilka].ocene))
+	return total / float64(len(studenti[vpisnaStevilka].Ocene))
 }
 
 func IzpisVsehOcen(studenti map[string]Student) {
 	fmt.Println("REDOVALNICA:")
 	for vpisna, s := range studenti {
-		fmt.Printf("%s - %s %s: %v\n", vpisna, s.ime, s.priimek, s.ocene)
+		fmt.Printf("%s - %s %s: %v\n", vpisna, s.Ime, s.Priimek, s.Ocene)
 	}
 }
 
@@ -55,6 +55,6 @@ func IzpisiKoncniUspeh(studenti map[string]Student) {
 			uspeh = "Povprečen študent"
 		}
 
-		fmt.Printf("%s %s: povprečna ocena %.1f -> %s\n", s.ime, s.priimek, avg, uspeh)
+		fmt.Printf("%s %s: povprečna ocena %.1f -> %s\n", s.Ime, s.Priimek, avg, uspeh)
 	}
 }
