@@ -2,12 +2,14 @@ package redovalnica
 
 import "fmt"
 
+// Student je struct, sestavljen iz imena, priimka in seznama ocen.
 type Student struct {
 	Ime     string
 	Priimek string
 	Ocene   []int
 }
 
+// DodajOceno doda oceno v seznam ocen študentu, podanem z vpisno številko
 func DodajOceno(studenti map[string]Student, vpisnaStevilka string, ocena int) {
 	if ocena > 10 && ocena < 0 {
 		fmt.Println("Ocena mora biti v intervalu [0,10].")
@@ -36,6 +38,7 @@ func povprecje(studenti map[string]Student, vpisnaStevilka string) float64 {
 	return total / float64(len(studenti[vpisnaStevilka].Ocene))
 }
 
+// IzpisVsehOcen izpiše celotno redovalnico, torej seznam ocen vsakega študenta
 func IzpisVsehOcen(studenti map[string]Student) {
 	fmt.Println("REDOVALNICA:")
 	for vpisna, s := range studenti {
@@ -43,11 +46,14 @@ func IzpisVsehOcen(studenti map[string]Student) {
 	}
 }
 
-func IzpisiKoncniUspeh(studenti map[string]Student) {
+// IzpisiKoncniUspeh uspeh vsakega študenta glede na povprečje in število ocen
+func IzpisiKoncniUspeh(studenti map[string]Student, minStOcen int) {
 	for vpisna, s := range studenti {
 		var avg = povprecje(studenti, vpisna)
 		var uspeh string
-		if avg >= 9 {
+		if len(studenti[vpisna].Ocene) < minStOcen {
+			uspeh = "Neuspešen študent!"
+		} else if avg >= 9 {
 			uspeh = "Odličen študent!"
 		} else if avg < 6 {
 			uspeh = "Neuspešen študent"
